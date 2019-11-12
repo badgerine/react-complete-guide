@@ -7,31 +7,24 @@ class App extends Component {
 
   state = {
     persons: [
-      {name: 'Stevovo', age: 23},
-      {name: 'Bongo', age: 33},
-      {name: 'Tumi', age: 24}
+      {id: 'p1', name: 'Stevovo', age: 23},
+      {id: 'p2', name: 'Bongo', age: 33},
+      {id: 'p3', name: 'Tumi', age: 24}
     ],
     showPersons : true
   }
- 
-  switchNameHandler = (newName) => {
-    // console.log("switch name was clicked")
-    // DONT DO THIS!! personsState.persons[0].name = "dumza";
-    this.setState({persons: [
-      {name: 'Stevovo', age: 23},
-      // {name: 'Bongo', age: 33},
-      {name: newName, age: 24}
-      ]
-    });
-    // console.log('after setPersonState');
-  }
 
-  nameChangeHandler = (event) => {
+  nameChangeHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+    const person = {...this.state.persons[personIndex]};
+    person.name = event.target.value;
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
     this.setState({
-      persons: [
-        {name: event.target.value, age: 55},
-        {name:  'Bongo', age: 33}
-      ]
+      persons: persons
     });
   }
 
@@ -41,7 +34,9 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
-    const persons = this.state.persons;
+    //always update state in an immutable fashion, without initially changing the original state
+    const persons = this.state.persons.slice();//slice copies the object to the new reference, as opposed to a reference to the original object
+    //or const persons = [...this.state.persons]; //using the spread operator.
     persons.splice(personIndex, 1);
     this.setState({persons: persons})
   }
@@ -61,7 +56,11 @@ class App extends Component {
           (<Person 
             click={() => {this.deletePersonHandler(index)}} 
             name={person.name} 
-            age={person.age}/>
+            age={person.age}
+            key={person.id}
+            liveMod = {(event) => {
+              this.nameChangeHandler(event,person.id);
+              }}/>//
           ))
         }
       </div>)
