@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import React, {useState} from 'react';
-import Radium from 'radium';
+import Radium, {StyleRoot} from 'radium';
 import './App.css';
 import Person from './Person/Person';
 
@@ -89,15 +89,17 @@ class App extends Component {
     console.log(styleclass);
 
     return (
-      <div className="App">
-        <h1>Hi, I'm a react app</h1>
-        <p className={styleclass.join(' ')}>I'm growing</p>
-        <button
-          style={bstyle}
-          onClick={this.togglePersonsHandler}>Show People</button>
-        <p />
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, I'm a react app</h1>
+          <p className={styleclass.join(' ')}>I'm growing</p>
+          <button
+            style={bstyle}
+            onClick={this.togglePersonsHandler}>Show People</button>
+          <p />
+          {persons}
+        </div>
+      </StyleRoot>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'Progress nyana!'));
   }
