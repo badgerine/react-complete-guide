@@ -43,15 +43,18 @@ class App extends Component {
 
   render() {
     const bstyle = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px', 
       cursor: 'pointer'
     };
 
-    let persons = this.state.showPersons ? (
-      <div>
+    let persons = null;
+    
+    if(this.state.showPersons) { 
+      persons = (<div>
         {this.state.persons.map((person, index) => 
           (<Person 
             click={() => {this.deletePersonHandler(index)}} 
@@ -63,16 +66,26 @@ class App extends Component {
               }}/>//
           ))
         }
-      </div>)
-      : null;
+      </div>);
+      bstyle.backgroundColor = 'red';
+    }
 
+    const styleclass = [];
+    if(this.state.persons.length <= 2){
+      styleclass.push('red');
+    }
+    if(this.state.persons.length <= 1){
+      styleclass.push('bold');
+    }
+    console.log(styleclass);
 
     return (
       <div className="App">
         <h1>Hi, I'm a react app</h1>
+        <p className={styleclass.join(' ')}>I'm growing</p>
         <button 
           style={bstyle}
-          onClick={this.togglePersonsHandler} >People</button>
+          onClick={this.togglePersonsHandler}>Show People</button>
         <p/>
         {persons}
       </div>
