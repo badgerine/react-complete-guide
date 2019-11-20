@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 // import React, {useState} from 'react';
-import Radium, {StyleRoot} from 'radium';
+import styled from 'styled-components';
 import './App.css';
 import Person from './Person/Person';
+
+const StyledButton = styled.button`
+  background-color: green;
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px,
+  cursor: pointer;
+
+  &:hover {
+    background-color: lightgreen;
+    color: black
+}`;
 
 class App extends Component {
 
@@ -43,19 +56,7 @@ class App extends Component {
   }
 
   render() {
-    const bstyle = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    };
-
+    
     let persons = null;
 
     if (this.state.showPersons) {
@@ -72,11 +73,11 @@ class App extends Component {
           ))
         }
       </div>);
-      bstyle.backgroundColor = 'red';
-      bstyle[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      // bstyle.backgroundColor = 'red';
+      // bstyle[':hover'] = {
+      //   backgroundColor: 'salmon',
+      //   color: 'black'
+      // }
     }
 
     const styleclass = [];
@@ -89,21 +90,18 @@ class App extends Component {
     console.log(styleclass);
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi, I'm a react app</h1>
-          <p className={styleclass.join(' ')}>I'm growing</p>
-          <button
-            style={bstyle}
-            onClick={this.togglePersonsHandler}>Show People</button>
-          <p />
-          {persons}
-        </div>
-      </StyleRoot>
+      <div className="App">
+        <h1>Hi, I'm a react app</h1>
+        <p className={styleclass.join(' ')}>I'm growing</p>
+        <StyledButton
+          onClick={this.togglePersonsHandler}>Show People</StyledButton>
+        <p />
+        {persons}
+      </div>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'Progress nyana!'));
   }
 }
 
-export default Radium(App);
+export default App;
 // export default app;
