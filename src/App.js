@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import React, {useState} from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -11,7 +11,7 @@ class App extends Component {
       { id: 'p2', name: 'Bongo', age: 33 },
       { id: 'p3', name: 'Tumi', age: 24 }
     ],
-    showPersons: true
+    showPersons: false
   }
 
   nameChangeHandler = (event, id) => {
@@ -44,6 +44,7 @@ class App extends Component {
   render() {
     
     let persons = null;
+    let btnClass = classes;
 
     if (this.state.showPersons) {
       persons = (<div>
@@ -59,22 +60,22 @@ class App extends Component {
           ))
         }
       </div>);
+      btnClass = classes.Red;
     }
 
     const styleclass = [];
     if (this.state.persons.length <= 2) {
-      styleclass.push('red');
+      styleclass.push(classes.red);
     }
     if (this.state.persons.length <= 1) {
-      styleclass.push('bold');
+      styleclass.push(classes.bold);
     }
-    console.log(styleclass);
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm a react app</h1>
         <p className={styleclass.join(' ')}>I'm growing</p>
-        <button className="button" onClick={this.togglePersonsHandler}>
+        <button className={btnClass} onClick={this.togglePersonsHandler}>
             Show People
         </button>
         <p />
