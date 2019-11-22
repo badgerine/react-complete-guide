@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import React, {useState} from 'react';
 import classes from './App.css';
 import Person from '../components/Person/Person';
+import PersonCollection from '../components/PersonCollection/PersonCollection';
+import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
 
@@ -43,44 +45,25 @@ class App extends Component {
 
   render() {
 
-    let persons = null;
-    let btnClass = [classes.Button];
+    let personsView = null;
 
     if (this.state.showPersons) {
-      persons = (<div>
-        {this.state.persons.map((person, index) =>
-          (
-              <Person
-                click={() => { this.deletePersonHandler(index) }}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                liveMod={(event) => {
-                  this.nameChangeHandler(event, person.id);
-                }} />//
-          ))
-        }
-      </div>);
-      btnClass.push(classes.Red);
-    }
-
-    const styleclass = [];
-    if (this.state.persons.length <= 2) {
-      styleclass.push(classes.red);
-    }
-    if (this.state.persons.length <= 1) {
-      styleclass.push(classes.bold);
+      personsView =
+        <PersonCollection
+          personCollection={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangeHandler}
+        />
     }
 
     return (
       <div className={classes.App}>
-        <h1>Hi, I'm a react app</h1>
-        <p className={styleclass.join(' ')}>I'm growing</p>
-        <button className={btnClass.join(' ')} onClick={this.togglePersonsHandler}>
-          Show People
-        </button>
+        <Cockpit
+          personCollection={this.state.persons}
+          showPersons={this.state.showPersons}
+          clicked={this.togglePersonsHandler} />
         <p />
-        {persons}
+        {personsView}
       </div>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'Progress nyana!'));
@@ -88,4 +71,3 @@ class App extends Component {
 }
 
 export default App;
-// export default app;
