@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 // import React, {useState} from 'react';
 import classes from './App.css';
+<<<<<<< HEAD:src/App.js
 import Person from './Person/Person';
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+=======
+import Person from '../components/Person/Person';
+>>>>>>> Sem_ErrorBoundary:src/containers/App.js
 
 class App extends Component {
 
