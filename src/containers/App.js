@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 // import React, {useState} from 'react';
 import classes from './App.css';
-<<<<<<< HEAD:src/App.js
-import Person from './Person/Person';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
-=======
 import Person from '../components/Person/Person';
->>>>>>> Sem_ErrorBoundary:src/containers/App.js
 
 class App extends Component {
 
@@ -55,16 +50,14 @@ class App extends Component {
       persons = (<div>
         {this.state.persons.map((person, index) =>
           (
-            <ErrorBoundary key={person.id}>
               <Person
                 click={() => { this.deletePersonHandler(index) }}
                 name={person.name}
                 age={person.age}
-                //key must be mapped to outer element
+                key={person.id}
                 liveMod={(event) => {
                   this.nameChangeHandler(event, person.id);
                 }} />//
-            </ErrorBoundary>
           ))
         }
       </div>);
