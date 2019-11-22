@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import React, {useState} from 'react';
 import classes from './App.css';
-import Person from './Person/Person';
+import Person from '../components/Person/Person';
 
 class App extends Component {
 
