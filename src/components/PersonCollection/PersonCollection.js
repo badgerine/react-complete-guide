@@ -22,6 +22,11 @@ class PersonCollection extends Component {
         console.log('[PersonCollection.js] componentDidUpdate(): '+prevProps,prevState,snapshot);
     }
 
+    componentWillUnmount(){
+        console.log('[PersonCollection.js] componentWillUnmout()');
+        //could place to close connections and clean up
+    }
+
     render() {
         console.log('[PersonCollection.js] rendering...');
         return (

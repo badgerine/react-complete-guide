@@ -5,21 +5,26 @@ const cockpit = (props) => {
 
   useEffect(() =>{
     console.log('[Cockpit.js] useEffect()');
-
-    //Http request ...
+    //simulate Http request ...
     setTimeout(() => {
-      alert('saved data to cloud!');
+      console.log('saved data to cloud!');
     }, 1000);
   }, []); //this empty array indicates to useEffect to only execute the 1st time this component is rendered.
 
   useEffect(() =>{
     console.log('[Cockpit.js] useEffect() when button is toggled');
-
-    //Http request ...
+    //simulate Http request ...
     setTimeout(() => {
-      alert('button toggled!');
+      console.log('[Cockpit.js] button toggled!');
     }, 1000);
   }, [props.showPersons]);//useEffect will be rum when the value of props.showPersons changes 
+
+  useEffect(() => {
+    //simulate http request...
+    return () => {
+      console.log('[Cockpit.js] clean up work in useEffect.')
+    }
+  },[]);// the return expression together with the brackets indicate that clean up work should only occur when the component is destroyed?
 
   let btnClass = [classes.Button];
   const styleclass = [];

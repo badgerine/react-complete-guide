@@ -5,7 +5,7 @@ import PersonCollection from '../components/PersonCollection/PersonCollection';
 import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     console.log('[App.js] constructor.')
   }
@@ -15,24 +15,27 @@ class App extends Component {
       { id: 'p2', name: 'Bongo', age: 33 },
       { id: 'p3', name: 'Tumi', age: 24 }
     ],
-    showPersons: false
+    showPersons: false,
+    showCockpit: true
   }
 
-  static getDerivedStateFromProps(props,state){
-    console.log('[Apps.js] getDerivedStateFromProps()',props,state);
+  static getDerivedStateFromProps(props, state) {
+    console.log('[Apps.js] getDerivedStateFromProps()', props, state);
     return state;
   }
 
-  componentDidMount(){
+  componentDidMount() {
     console.log('[App.js] componentDidMount()');
+    setTimeout(()=>{this.setState({showCockpit:false})}, 9000);
+
   }
 
-  shouldComponentUpdate(nextProps, nextState){
+  shouldComponentUpdate(nextProps, nextState) {
     console.log('[App.js] shouldComponentUpdate()');
     return true;
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     console.log('[App.js] componentDidUpdate()');
   }
 
@@ -66,7 +69,14 @@ class App extends Component {
   render() {
     console.log('[App.js] render()')
     let personsView = null;
-
+    let cockpitView = this.state.showCockpit ? (
+      <Cockpit
+        title={this.props.appTitle}
+        personCollection={this.state.persons}
+        showPersons={this.state.showPersons}
+        clicked={this.togglePersonsHandler} />) :
+        null;
+        
     if (this.state.showPersons) {
       personsView =
         <PersonCollection
@@ -78,11 +88,7 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-        <Cockpit
-          title={this.props.appTitle}
-          personCollection={this.state.persons}
-          showPersons={this.state.showPersons}
-          clicked={this.togglePersonsHandler} />
+        {cockpitView}
         <p />
         {personsView}
       </div>
