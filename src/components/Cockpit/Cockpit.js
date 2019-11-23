@@ -12,6 +12,15 @@ const cockpit = (props) => {
     }, 1000);
   }, []); //this empty array indicates to useEffect to only execute the 1st time this component is rendered.
 
+  useEffect(() =>{
+    console.log('[Cockpit.js] useEffect() when button is toggled');
+
+    //Http request ...
+    setTimeout(() => {
+      alert('button toggled!');
+    }, 1000);
+  }, [props.showPersons]);//useEffect will be rum when the value of props.showPersons changes 
+
   let btnClass = [classes.Button];
   const styleclass = [];
   if (props.personCollection.length <= 2) {
