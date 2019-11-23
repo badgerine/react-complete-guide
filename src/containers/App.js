@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 // import React, {useState} from 'react';
 import classes from './App.css';
-import Person from '../components/Person/Person';
 import PersonCollection from '../components/PersonCollection/PersonCollection';
 import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
-
+  constructor(props){
+    super(props);
+    console.log('[App.js] constructor.')
+  }
   state = {
     persons: [
       { id: 'p1', name: 'Stevovo', age: 23 },
@@ -14,6 +16,15 @@ class App extends Component {
       { id: 'p3', name: 'Tumi', age: 24 }
     ],
     showPersons: false
+  }
+
+  static getDerivedStateFromProps(props,state){
+    console.log('[Apps.js] getDerivedStateFromProps()',props,state);
+    return state;
+  }
+
+  componentDidMount(){
+    console.log('[App.js] componentDidMount()');
   }
 
   nameChangeHandler = (event, id) => {
@@ -44,7 +55,7 @@ class App extends Component {
   }
 
   render() {
-
+    console.log('[App.js] render()')
     let personsView = null;
 
     if (this.state.showPersons) {
@@ -59,6 +70,7 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <Cockpit
+          title={this.props.appTitle}
           personCollection={this.state.persons}
           showPersons={this.state.showPersons}
           clicked={this.togglePersonsHandler} />
