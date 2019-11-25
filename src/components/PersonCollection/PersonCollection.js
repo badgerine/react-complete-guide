@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'; //PureComponent is a normal component that by default implements shouldComponentUpdate checking all the component's props.
-import Person from '../Person/Person'
+import Person from '../Person/Person';
+import withClass2 from '../hoc/withClass2';
+import classes from '../../containers/App.css';
 
 class PersonCollection extends PureComponent {
     // static getDerivedStateFromProps(props,state){
@@ -15,37 +17,35 @@ class PersonCollection extends PureComponent {
     //             ;
     // }
 
-    getSnapshotBeforeUpdate(prevProps, prevState){
+    getSnapshotBeforeUpdate(prevProps, prevState) {
         console.log('[PersonCollection.js] getSnapshotBeforeUpdate()');
         //supposed to return object [null], but developer tools interpreter didnt complain!!
-        return {message: 'snapshot data^'};
+        return { message: 'snapshot data^' };
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot){
-        console.log('[PersonCollection.js] componentDidUpdate(): '+prevProps,prevState,snapshot);
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('[PersonCollection.js] componentDidUpdate(): ' + prevProps, prevState, snapshot);
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         console.log('[PersonCollection.js] componentWillUnmout()');
         //could place to close connections and clean up
     }
 
     render() {
         console.log('[PersonCollection.js] rendering...');
-        return (
-            this.props.personCollection.map((person, index) => {
-                return (
-                    <Person
-                        click={() => { this.props.clicked(index) }}
-                        name={person.name}
-                        age={person.age}
-                        key={person.id}
-                        liveMod={(event) => {
-                            this.props.changed(event, person.id);
-                        }} />);
-            })
-        );
+        return this.props.personCollection ? this.props.personCollection.map((person, index) =>
+            <Person
+                click={() => { this.props.clicked(index) }}
+                name={person.name}
+                age={person.age}
+                key={person.id}
+                liveMod={(event) => {
+                    this.props.changed(event, person.id)
+                }}
+            />
+        ) : null;
     }
 }
 
-export default PersonCollection;
+export default withClass2(PersonCollection, classes.bold);
