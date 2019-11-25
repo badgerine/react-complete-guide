@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'; //PureComponent is a normal component that by default implements shouldComponentUpdate checking all the component's props.
 import Person from '../Person/Person'
 
 class PersonCollection extends PureComponent {
