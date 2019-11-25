@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import classes from './Cockpit.css';
-import Auxilliary from '../hoc/Auxilliary';
 
 const cockpit = (props) => {
 
@@ -41,13 +40,13 @@ const cockpit = (props) => {
   }
 
   return (
-    <Auxilliary>
+    <Fragment>
       <h1>{props.title}</h1>
       <p className={styleclass.join(' ')}>I'm growing</p>
       <button className={btnClass.join(' ')} onClick={props.clicked}>
         Show People
       </button>
-    </Auxilliary>
+    </Fragment>
   );
 };
 
