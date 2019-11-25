@@ -1,19 +1,44 @@
 import React, { Component } from 'react';
 // import React, {useState} from 'react';
 import classes from './App.css';
-import Person from '../components/Person/Person';
 import PersonCollection from '../components/PersonCollection/PersonCollection';
-import Cockpit from '../components/Cockpit/Cockpit'
+import Cockpit from '../components/Cockpit/Cockpit';
+import withClass2 from '../components/hoc/withClass2';//lower case as withClass2 is only a function and not a function component
+import Auxilliary from '../components/hoc/Auxilliary';
 
 class App extends Component {
-
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor.')
+  }
   state = {
     persons: [
       { id: 'p1', name: 'Stevovo', age: 23 },
       { id: 'p2', name: 'Bongo', age: 33 },
       { id: 'p3', name: 'Tumi', age: 24 }
     ],
-    showPersons: false
+    showPersons: false,
+    showCockpit: true
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[Apps.js] getDerivedStateFromProps()', props, state);
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount()');
+    // setTimeout(()=>{this.setState({showCockpit:false})}, 9000);
+
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate()');
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate()');
   }
 
   nameChangeHandler = (event, id) => {
@@ -44,8 +69,16 @@ class App extends Component {
   }
 
   render() {
-
+    console.log('[App.js] render()')
     let personsView = null;
+    
+    let cockpitView = this.state.showCockpit ? (
+      <Cockpit
+        title={this.props.appTitle}
+        personsLength={this.state.personsLength}
+        showPersons={this.state.showPersons}
+        clicked={this.togglePersonsHandler} />) :
+        null;
 
     if (this.state.showPersons) {
       personsView =
@@ -57,18 +90,24 @@ class App extends Component {
     }
 
     return (
+<<<<<<< HEAD
       <div className={classes.App}>
         <Cockpit
           title={this.props.appTitle}
           personCollection={this.state.persons}
           showPersons={this.state.showPersons}
           clicked={this.togglePersonsHandler} />
+=======
+      <Auxilliary>
+        <button onClick={() => this.setState({showCockpit: !this.state.showCockpit})}>Show Cockpit</button>
+        {cockpitView}
+>>>>>>> component-lifecycle
         <p />
         {personsView}
-      </div>
+      </Auxilliary>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'Progress nyana!'));
   }
 }
 
-export default App;
+export default withClass2(App,classes.App);

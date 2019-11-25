@@ -1,21 +1,45 @@
-import React from 'react';
+import React, { useEffect, Fragment } from 'react';
 import classes from './Cockpit.css';
 
 const cockpit = (props) => {
 
-    let btnClass = [classes.Button];
-    const styleclass = [];
-    if (props.personCollection.length <= 2) {
-      styleclass.push(classes.red);
-    }
-    if (props.personCollection.length <= 1) {
-      styleclass.push(classes.bold);
-    }
+  useEffect(() => {
+    console.log('[Cockpit.js] useEffect()1');
+    //simulate Http request ...
+    setTimeout(() => {
+      console.log('[Cockpit.js] useEffect()1|setTimeOut() saved data to cloud!');
+    }, 1000);
+  }, []); //this empty array indicates to useEffect to only execute the 1st time this component is rendered.
 
-    if(props.showPersons){
-        btnClass.push(classes.Red);
-    }
+  useEffect(() => {
+    console.log('[Cockpit.js] useEffect()2');
+    //simulate Http request ...
+    setTimeout(() => {
+      console.log('[Cockpit.js] useEffect()2|setTimeout() button toggled!');
+    }, 1000);
+  }, [props.showPersons]);//useEffect will be rum when the value of props.showPersons changes 
 
+  useEffect(() => {
+    //simulate http request...
+    return () => {
+      console.log('[Cockpit.js] useEffect()3|return() clean up work in useEffect.')
+    }
+  }, []);// the return expression together with the brackets indicate that clean up work should only occur when the component is destroyed?
+
+  let btnClass = [classes.Button];
+  const styleclass = [];
+  if (props.personsLength <= 2) {
+    styleclass.push(classes.red);
+  }
+  if (props.personsLength <= 1) {
+    styleclass.push(classes.bold);
+  }
+
+  if (props.showPersons) {
+    btnClass.push(classes.Red);
+  }
+
+<<<<<<< HEAD
     return (
         <div>
             <h1>{props.title}</h1>
@@ -25,6 +49,17 @@ const cockpit = (props) => {
         </button>
         </div>
     );
+=======
+  return (
+    <Fragment>
+      <h1>{props.title}</h1>
+      <p className={styleclass.join(' ')}>I'm growing</p>
+      <button className={btnClass.join(' ')} onClick={props.clicked}>
+        Show People
+      </button>
+    </Fragment>
+  );
+>>>>>>> component-lifecycle
 };
 
-export default cockpit;
+export default React.memo(cockpit); //functional components do not have lifecycle hooks[shouldComponentUpdate]. React.memo does the same thing as shouldComponentUpdate: stores snapshot of component and only rerenders if the component inputs/props have changed.
