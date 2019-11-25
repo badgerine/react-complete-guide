@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 // import React, {useState} from 'react';
 import classes from './App.css';
 import PersonCollection from '../components/PersonCollection/PersonCollection';
-import Cockpit from '../components/Cockpit/Cockpit'
+import Cockpit from '../components/Cockpit/Cockpit';
+import withClass2 from '../components/hoc/withClass2';//lower case as withClass2 is only a function and not a function component
+import Auxilliary from '../components/hoc/Auxilliary';
 
 class App extends Component {
   constructor(props) {
@@ -88,16 +90,15 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.App}>
-        
+      <Auxilliary>
         <button onClick={() => this.setState({showCockpit: !this.state.showCockpit})}>Show Cockpit</button>
         {cockpitView}
         <p />
         {personsView}
-      </div>
+      </Auxilliary>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'Progress nyana!'));
   }
 }
 
-export default App;
+export default withClass2(App,classes.App);
