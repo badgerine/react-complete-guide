@@ -39,17 +39,6 @@ const cockpit = (props) => {
     btnClass.push(classes.Red);
   }
 
-<<<<<<< HEAD
-    return (
-        <div>
-            <h1>{props.title}</h1>
-            <p className={styleclass.join(' ')}>I'm growing</p>
-            <button className={btnClass.join(' ')} onClick={props.clicked}>
-                Show People
-        </button>
-        </div>
-    );
-=======
   return (
     <Fragment>
       <h1>{props.title}</h1>
@@ -59,7 +48,6 @@ const cockpit = (props) => {
       </button>
     </Fragment>
   );
->>>>>>> component-lifecycle
 };
 
 export default React.memo(cockpit); //functional components do not have lifecycle hooks[shouldComponentUpdate]. React.memo does the same thing as shouldComponentUpdate: stores snapshot of component and only rerenders if the component inputs/props have changed.

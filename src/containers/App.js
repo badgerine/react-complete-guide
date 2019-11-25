@@ -18,7 +18,8 @@ class App extends Component {
       { id: 'p3', name: 'Tumi', age: 24 }
     ],
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    changeCounter: 0
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -50,8 +51,11 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({
-      persons: persons
+    this.setState((prevState, props) => {//the only way to guarantee that you are updating your state based on the previous state is to pass in the previous state. otherwise in a resource intensive app, you may access the state before it is updated.
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1
+      }
     });
   }
 
@@ -71,14 +75,14 @@ class App extends Component {
   render() {
     console.log('[App.js] render()')
     let personsView = null;
-    
+
     let cockpitView = this.state.showCockpit ? (
       <Cockpit
         title={this.props.appTitle}
         personsLength={this.state.personsLength}
         showPersons={this.state.showPersons}
         clicked={this.togglePersonsHandler} />) :
-        null;
+      null;
 
     if (this.state.showPersons) {
       personsView =
@@ -90,18 +94,9 @@ class App extends Component {
     }
 
     return (
-<<<<<<< HEAD
-      <div className={classes.App}>
-        <Cockpit
-          title={this.props.appTitle}
-          personCollection={this.state.persons}
-          showPersons={this.state.showPersons}
-          clicked={this.togglePersonsHandler} />
-=======
       <Auxilliary>
-        <button onClick={() => this.setState({showCockpit: !this.state.showCockpit})}>Show Cockpit</button>
+        <button onClick={() => this.setState({ showCockpit: !this.state.showCockpit })}>Show Cockpit</button>
         {cockpitView}
->>>>>>> component-lifecycle
         <p />
         {personsView}
       </Auxilliary>
@@ -110,4 +105,4 @@ class App extends Component {
   }
 }
 
-export default withClass2(App,classes.App);
+export default withClass2(App, classes.App);
