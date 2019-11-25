@@ -50,4 +50,4 @@ const cockpit = (props) => {
   );
 };
 
-export default cockpit;
+export default React.memo(cockpit); //functional components do not have lifecycle hooks[shouldComponentUpdate]. React.memo does the same thing as shouldComponentUpdate: stores snapshot of component and only rerenders if the component inputs/props have changed.
