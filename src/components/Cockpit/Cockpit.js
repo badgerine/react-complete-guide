@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import classes from './Cockpit.css';
+import Auxilliary from '../hoc/Auxilliary';
 
 const cockpit = (props) => {
 
-  useEffect(() =>{
+  useEffect(() => {
     console.log('[Cockpit.js] useEffect()1');
     //simulate Http request ...
     setTimeout(() => {
@@ -11,7 +12,7 @@ const cockpit = (props) => {
     }, 1000);
   }, []); //this empty array indicates to useEffect to only execute the 1st time this component is rendered.
 
-  useEffect(() =>{
+  useEffect(() => {
     console.log('[Cockpit.js] useEffect()2');
     //simulate Http request ...
     setTimeout(() => {
@@ -24,7 +25,7 @@ const cockpit = (props) => {
     return () => {
       console.log('[Cockpit.js] useEffect()3|return() clean up work in useEffect.')
     }
-  },[]);// the return expression together with the brackets indicate that clean up work should only occur when the component is destroyed?
+  }, []);// the return expression together with the brackets indicate that clean up work should only occur when the component is destroyed?
 
   let btnClass = [classes.Button];
   const styleclass = [];
@@ -40,13 +41,13 @@ const cockpit = (props) => {
   }
 
   return (
-    [
-      <h1 key='k1'>{props.title}</h1>,
-      <p key='k2' className={styleclass.join(' ')}>I'm growing</p>,
-      <button key='k3' className={btnClass.join(' ')} onClick={props.clicked}>
+    <Auxilliary>
+      <h1>{props.title}</h1>
+      <p className={styleclass.join(' ')}>I'm growing</p>
+      <button className={btnClass.join(' ')} onClick={props.clicked}>
         Show People
       </button>
-    ]
+    </Auxilliary>
   );
 };
 
