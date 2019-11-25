@@ -26,7 +26,7 @@ class App extends Component {
 
   componentDidMount() {
     console.log('[App.js] componentDidMount()');
-    setTimeout(()=>{this.setState({showCockpit:false})}, 9000);
+    // setTimeout(()=>{this.setState({showCockpit:false})}, 9000);
 
   }
 
@@ -69,6 +69,7 @@ class App extends Component {
   render() {
     console.log('[App.js] render()')
     let personsView = null;
+    
     let cockpitView = this.state.showCockpit ? (
       <Cockpit
         title={this.props.appTitle}
@@ -76,7 +77,7 @@ class App extends Component {
         showPersons={this.state.showPersons}
         clicked={this.togglePersonsHandler} />) :
         null;
-        
+
     if (this.state.showPersons) {
       personsView =
         <PersonCollection
@@ -88,6 +89,8 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
+        
+        <button onClick={() => this.setState({showCockpit: !this.state.showCockpit})}>Show Cockpit</button>
         {cockpitView}
         <p />
         {personsView}
