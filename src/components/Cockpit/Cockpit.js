@@ -40,13 +40,13 @@ const cockpit = (props) => {
   }
 
   return (
-    <div>
-      <h1>{props.title}</h1>
-      <p className={styleclass.join(' ')}>I'm growing</p>
-      <button className={btnClass.join(' ')} onClick={props.clicked}>
+    [
+      <h1 key='k1'>{props.title}</h1>,
+      <p key='k2' className={styleclass.join(' ')}>I'm growing</p>,
+      <button key='k3' className={btnClass.join(' ')} onClick={props.clicked}>
         Show People
-        </button>
-    </div>
+      </button>
+    ]
   );
 };
 
