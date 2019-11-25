@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import React, {useState} from 'react';
 import classes from './App.css';
 import PersonCollection from '../components/PersonCollection/PersonCollection';
 import Cockpit from '../components/Cockpit/Cockpit';
