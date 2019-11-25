@@ -9,7 +9,7 @@ class PersonCollection extends Component {
 
     shouldComponentUpdate(nextProps, nextState){
         console.log('[PersonCollection.js] shouldComponentUpdate()');
-        return true;
+        return nextProps.personCollection !== this.props.personCollection;
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState){
