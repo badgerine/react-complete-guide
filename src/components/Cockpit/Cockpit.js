@@ -1,14 +1,18 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useRef } from 'react';
 import classes from './Cockpit.css';
 
 const cockpit = (props) => {
 
+  const toggleBtnRef = useRef(null);
+  
+  //useEffect runs after a render cycle
   useEffect(() => {
-    console.log('[Cockpit.js] useEffect()1');
     //simulate Http request ...
-    setTimeout(() => {
-      console.log('[Cockpit.js] useEffect()1|setTimeOut() saved data to cloud!');
-    }, 1000);
+    // setTimeout(() => {
+    //   console.log('[Cockpit.js] useEffect()1|setTimeOut() saved data to cloud!');
+    // }, 1000);
+    console.log('[Cockpit.js] useEffect()1 | toggle button to show people');
+    toggleBtnRef.current.click();
   }, []); //this empty array indicates to useEffect to only execute the 1st time this component is rendered.
 
   useEffect(() => {
@@ -43,7 +47,7 @@ const cockpit = (props) => {
     <Fragment>
       <h1>{props.title}</h1>
       <p className={styleclass.join(' ')}>I'm growing</p>
-      <button className={btnClass.join(' ')} onClick={props.clicked}>
+      <button ref={toggleBtnRef} className={btnClass.join(' ')} onClick={props.clicked}>
         Show People
       </button>
     </Fragment>
