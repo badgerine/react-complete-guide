@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import personClasses from './Person.css';
 import WithClass from '../hoc/WithClass';
 import PropTypes from 'prop-types';
+import AuthContext from '../../context/auth-context';
 
 class Person extends Component {
 
-    constructor(props){//always add props to ensure app works as expected!!
+    constructor(props) {//always add props to ensure app works as expected!!
         super(props);
         this.inputElementRef = React.createRef();
     }
 
-    componentDidMount(){
+    componentDidMount() {
         // this.inputElement.focus();
         this.inputElementRef.current.focus();
     }
@@ -19,13 +20,15 @@ class Person extends Component {
         console.log('[Person.js] rendering...');
         return (
             <WithClass classes={[personClasses.Person]}>
-                {this.props.isAuthenticated ? <p>Authenticated</p> : <p>Please log in</p>}
-                < input 
-                type="text" 
-                // ref={(inputEl) => {this.inputElement = inputEl;}}//only works in class based components!!
-                ref = {this.inputElementRef}
-                onChange={this.props.liveMod} 
-                value={this.props.name} />
+                <AuthContext.Consumer>
+                    {(context) => context.authenticated ? <p>Authenticated</p> : <p>Please log in</p>}
+                </AuthContext.Consumer>
+                <input
+                    type="text"
+                    // ref={(inputEl) => {this.inputElement = inputEl;}}//only works in class based components!!
+                    ref={this.inputElementRef}
+                    onChange={this.props.liveMod}
+                    value={this.props.name} />
                 <p onClick={this.props.click}>i'm {this.props.name} and i am {this.props.age} years old! {this.props.children}</p>
             </WithClass>
 

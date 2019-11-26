@@ -4,6 +4,7 @@ import PersonCollection from '../components/PersonCollection/PersonCollection';
 import Cockpit from '../components/Cockpit/Cockpit';
 import withClass2 from '../components/hoc/withClass2';//lower case as withClass2 is only a function and not a function component
 import Auxilliary from '../components/hoc/Auxilliary';
+import AuthContext from '../context/auth-context';
 
 class App extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class App extends Component {
   }
 
   loginHandler = () => {
-    this.setState({authenticated: true});
+    this.setState({ authenticated: true });
   };
 
   render() {
@@ -85,8 +86,8 @@ class App extends Component {
         title={this.props.appTitle}
         personsLength={this.state.personsLength}
         showPersons={this.state.showPersons}
-        clicked={this.togglePersonsHandler} 
-        login={this.loginHandler}/>) :
+        clicked={this.togglePersonsHandler}
+        login={this.loginHandler} />) :
       null;
 
     if (this.state.showPersons) {
@@ -102,9 +103,11 @@ class App extends Component {
     return (
       <Auxilliary>
         <button onClick={() => this.setState({ showCockpit: !this.state.showCockpit })}>Show Cockpit</button>
-        {cockpitView}
-        <p />
-        {personsView}
+        <AuthContext.Provider value={{authenticated: this.state.authenticated, login: this.loginHandler}}>
+          {cockpitView}
+          <p />
+          {personsView}
+        </AuthContext.Provider>
       </Auxilliary>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'Progress nyana!'));
