@@ -50,6 +50,7 @@ const cockpit = (props) => {
       <button ref={toggleBtnRef} className={btnClass.join(' ')} onClick={props.clicked}>
         Show People
       </button>
+      <button onClick={props.login} className={btnClass.join(' ')}>Log in</button>
     </Fragment>
   );
 };

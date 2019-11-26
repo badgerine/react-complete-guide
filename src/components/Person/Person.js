@@ -19,6 +19,7 @@ class Person extends Component {
         console.log('[Person.js] rendering...');
         return (
             <WithClass classes={[personClasses.Person]}>
+                {this.props.isAuthenticated ? <p>Authenticated</p> : <p>Please log in</p>}
                 < input 
                 type="text" 
                 // ref={(inputEl) => {this.inputElement = inputEl;}}//only works in class based components!!

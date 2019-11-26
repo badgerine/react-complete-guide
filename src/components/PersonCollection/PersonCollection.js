@@ -43,6 +43,7 @@ class PersonCollection extends PureComponent {
                 liveMod={(event) => {
                     this.props.changed(event, person.id)
                 }}
+                isAuthenticated={this.props.isAuthenticated}
             />
         ) : null;
     }
