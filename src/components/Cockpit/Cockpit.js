@@ -1,10 +1,11 @@
-import React, { useEffect, Fragment, useRef } from 'react';
+import React, { useEffect, Fragment, useRef, useContext } from 'react';
 import classes from './Cockpit.css';
 import AuthContext from '../../context/auth-context';
 
 const cockpit = (props) => {
 
   const toggleBtnRef = useRef(null);
+  const authContext = useContext(AuthContext);
   
   //useEffect runs after a render cycle
   useEffect(() => {
@@ -12,6 +13,7 @@ const cockpit = (props) => {
     // setTimeout(() => {
     //   console.log('[Cockpit.js] useEffect()1|setTimeOut() saved data to cloud!');
     // }, 1000);
+    console.log('[Cockpit.js]useEffect()1| Context value: '+authContext.authenticated);
     console.log('[Cockpit.js] useEffect()1 | toggle button to show people');
     toggleBtnRef.current.click();
   }, []); //this empty array indicates to useEffect to only execute the 1st time this component is rendered.
@@ -51,9 +53,7 @@ const cockpit = (props) => {
       <button ref={toggleBtnRef} className={btnClass.join(' ')} onClick={props.clicked}>
         Show People
       </button>
-      <AuthContext.Consumer>
-      {(context) => <button onClick={context.login} className={btnClass.join(' ')}>Log in</button>}
-      </AuthContext.Consumer>
+      <button onClick={authContext.login} className={btnClass.join(' ')}>Log in</button>
     </Fragment>
   );
 };
